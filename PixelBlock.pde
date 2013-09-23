@@ -25,6 +25,7 @@ class PixelBlockArray {
 }
 
 
+
 class PixelBlock {
   int x, y, w, h;
   float r, g, b, hh, ss, bb;
@@ -59,13 +60,13 @@ class PixelBlock {
     noStroke();
     if (r > b && r > g) {
       fill(r, 0, 0, 100);
-    } 
+    }
     else if (b > r && b > g) {
       fill(0, 0, b, 100);
-    } 
+    }
     else if (g > r && g > b) {
       fill(0, g, 0, 100);
-    } 
+    }
     else {
       fill(10, 10, 10, 100);
     }
