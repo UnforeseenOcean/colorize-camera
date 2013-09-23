@@ -6,7 +6,7 @@ void setup() {
   size(640, 480); 
   buffer = createGraphics(width, height);
   cam = new CameraCapture(this);
-  pixel_blocks = new PixelBlockArray(width / 20, height / 20);
+  pixel_blocks = new PixelBlockArray(width / 12, height / 12);
 }
 
 void draw() {
@@ -14,4 +14,5 @@ void draw() {
   buffer.set(0, 0, cam.toImage());
   set(0, 0, cam.toImage());
   pixel_blocks.display();
+  pixel_blocks.play();
 }
