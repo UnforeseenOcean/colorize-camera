@@ -15,7 +15,7 @@ class PixelBlockArray {
       pixel_blocks.get(i).grab();
       pixel_blocks.get(i).analyze();
       //if (frameCount % 15 == 0) {
-        pixel_blocks.get(i).play();
+      pixel_blocks.get(i).play();
       //}
       pixel_blocks.get(i).display();
     }
@@ -28,7 +28,7 @@ class PixelBlockArray {
 
 
 class PixelBlock {
-  int x, y, w, h;
+  int x, y, w, h, a;
   float r, g, b, hh, ss, bb;
   PGraphics pg;
   PImage img;
@@ -39,6 +39,7 @@ class PixelBlock {
     y = _y;
     w = _w;
     h = _h;
+    a = 255;
     grab();
     analyze();
   }
@@ -70,49 +71,47 @@ class PixelBlock {
     else {
       block_color = "gray";
     }
-
   }
 
   void play() {
     if (block_color != previous_block_color) {
       if (block_color == "red") {
-        red.setOctave((int) map(r, 0, 255, 0, 6));
-        red.setDuration(map(x, 0, width, 0.125, 0.5));
-        red.setGain(map(r, 0, 255, 0, -6));
-        //red.setPinkNoise(map(r, 0, 255, 0, 6));
+        red.updateValues(r, x, y);
         red.play();
       }
       else if (block_color == "blue") {
-        blue.setOctave((int) map(b, 0, 255, 0, 6));
-        blue.setDuration(map(x, 0, width, 0.125, 0.5));
+        blue.updateValues(b, x, y);
         blue.play();
       }
       if (block_color == "green") {
-        green.setOctave((int) map(g, 0, 255, 0, 6));
-        green.setDuration(map(x, 0, width, 0.125, 0.5));
+        green.updateValues(g, x, y);
         green.play();
       }
     }
   }
 
   void display() {
+    if (block_color != previous_block_color) {
+      a = 255;
+    }
     noStroke();
     if (block_color == "red") {
-      fill(r, 0, 0);
+      fill(r, 0, 0, a);
     }
     else if (block_color == "blue") {
-      fill(0, 0, b);
+      fill(0, 0, b, a);
     }
     else if (block_color == "green") {
-      fill(0, g, 0);
+      fill(0, g, 0, a);
     }
     else {
-      fill(10, 10, 10, 100);
+      fill(10, 10, 10, a);
     }
 
     //fill(r, g, b);
-
     rect(x, y, w, h);
+    
+    a--;
   }
 }
 

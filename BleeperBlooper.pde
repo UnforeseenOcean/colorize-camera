@@ -51,7 +51,13 @@ class BleeperBlooper {
     duration = _duration;
     scaleDegrees = _scaleDegrees;
     g = 3;
-  } 
+  }
+  
+  void updateValues(float _n, int _x, int _y){
+    setOctave((int) map(_n, 0, 255, 0, 6));
+    setDuration(map(_x, 0, width, 0.125, 0.5));
+    setGain(map(_n, 0, 255, 0, -6)); 
+  }
 
   //modify to reflect passed in rgb values 
   void setOctave(int _o)
